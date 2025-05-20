@@ -1,75 +1,128 @@
+"use client"
+
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod"
+import { useState } from "react"
+import { Eye, EyeOff } from "lucide-react"
+
+// اصلاح شده: phone به صورت رشته با regex برای اعتبارسنجی شماره موبایل
+const loginSchema = z.object({
+  phone: z
+    .string()
+    .min(10, "شماره موبایل معتبر نیست")
+    .max(12, "شماره موبایل معتبر نیست")
+    .regex(/^9\d{9}$/, "شماره موبایل معتبر نیست"),
+  password: z.string().min(6, "کلمه عبور باید حداقل ۶ کاراکتر باشد"),
+})
+
+type LoginFormValues = z.infer<typeof loginSchema>
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+  })
+
+  const [showPassword, setShowPassword] = useState(false)
+
+  const onSubmit = (data: LoginFormValues) => {
+    console.log("ورود موفق:", data)
+  }
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8">
+          <form onSubmit={handleSubmit(onSubmit)} className="p-6 md:p-8">
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
-                <h1 className="text-2xl font-bold">به <span className="text-secondary 
-                [text-shadow:1px_2px_3px_rgba(0,0,0,0.5)]
-                ">همراه کارفرما</span> خوش آمدید</h1>
+                <h1 className="text-2xl font-bold">
+                  به{" "}
+                  <span className="text-secondary [text-shadow:1px_2px_3px_rgba(0,0,0,0.5)]">
+                    همراه کارفرما
+                  </span>{" "}
+                  خوش آمدید
+                </h1>
                 <p>به حساب کاربری خود وارد شوید</p>
               </div>
-              <div className="grid gap-3">
+
+              {/* Phone Field */}
+              <div className="grid gap-2">
                 <Label dir="rtl" htmlFor="phone">شماره موبایل</Label>
                 <Input
-                  className="bg-primary"
-                  id="phome"
+                  id="phone"
                   type="text"
-                  placeholder="09*******"
-                  required
+                  placeholder="9*********"
+                  className="bg-primary"
+                  {...register("phone")}
                 />
+                {errors.phone && (
+                  <p className="text-red-500 text-sm">{errors.phone.message}</p>
+                )}
               </div>
-              <div className="grid gap-3">
-                <div className="flex flex-col items-end">
-                  <Label dir="ltr" htmlFor="password">کلمه عبور</Label>
+
+              {/* Password Field with show/hide toggle */}
+              <div className="grid gap-2">
+                <Label dir="rtl" htmlFor="password">کلمه عبور</Label>
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    className="bg-primary pr-10"
+                    {...register("password")}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-0 right-2 flex items-center text-muted-foreground"
+                    tabIndex={-1}
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
                 </div>
-                <Input
-                  className="bg-primary"
-                  id="password"
-                  type="password"
-                  required />
-              </div>
-              <div className="grid gap-3">
-                <div className="flex flex-col items-end">
-                  <Label dir="ltr" htmlFor="cpassword">تکرار کلمه عبور</Label>
-                </div>
-                <Input
-                  className="bg-primary"
-                  id="cpassword"
-                  type="password"
-                  required />
-                <div className="flex items-end justify-end">
+                {errors.password && (
+                  <p className="text-red-500 text-sm text-right">{errors.password.message}</p>
+                )}
+                <div className="flex justify-end">
                   <Link
                     href="/forgot-password"
-                    className="ml-auto text-sm underline-offset-2 hover:underline text-blue-500"
+                    className="text-sm underline-offset-2 hover:underline text-blue-500"
                   >
                     رمز عبور خود را فراموش کرده‌اید؟
                   </Link>
                 </div>
               </div>
-              <Button className="w-full bg-chart-6 border-black rounded-md">
+
+              <Button
+                type="submit"
+                className="w-full bg-chart-6 border-black rounded-md"
+              >
                 ورود
               </Button>
+
               <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
-                <span className="bg-card text-muted-black relative z-10 px-2">
-                  یا
-                </span>
+                <span className="bg-card text-muted-black relative z-10 px-2">یا</span>
               </div>
+
               <div className="text-center text-sm">
                 حساب کاربری ندارید؟{" "}
-                <Link href="/register" className="underline underline-offset-4 text-blue-500 hover:font-bold">
+                <Link
+                  href="/register"
+                  className="underline underline-offset-4 text-blue-500 hover:font-bold"
+                >
                   ثبت‌نام کنید
                 </Link>
               </div>
@@ -77,13 +130,14 @@ export function LoginForm({
           </form>
           <div className="bg-muted relative hidden md:block">
             <img
-              src={"login.svg"}
+              src="login.svg"
               alt="تصویر"
               className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
         </CardContent>
       </Card>
+
       <div className="text-muted-foreground *:[a]:hover:font-bold text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
         با کلیک روی ادامه، شما با{" "}
         <Link href="/term" className="text-blue-500">شرایط استفاده</Link> و{" "}
