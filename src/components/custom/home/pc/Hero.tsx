@@ -1,7 +1,7 @@
-import Container from "../Container";
+import Container from "../../Container";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Img from "../LazyLoadImg";
+import Img from "../../LazyLoadImg";
 
 const HeroSection = () => (
   <section className="border-b border-dashed border-black">

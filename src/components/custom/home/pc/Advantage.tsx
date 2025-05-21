@@ -1,6 +1,6 @@
 import React from "react";
-import Container from "../Container";
-import Img from "../LazyLoadImg";
+import Container from "../../Container";
+import Img from "../../LazyLoadImg";
 
 export const Advantages = [
   {

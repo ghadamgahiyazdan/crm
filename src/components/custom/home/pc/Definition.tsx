@@ -1,5 +1,5 @@
-import Container from "../Container";
-import Img from "../LazyLoadImg";
+import Container from "../../Container";
+import Img from "../../LazyLoadImg";
 
 const CrmDefinitionSection = () => (
   <section className="border-b border-dashed border-black bg-gradient-to-t from-white via-amber-100 to-white">
