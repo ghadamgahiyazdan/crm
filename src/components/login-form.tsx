@@ -11,16 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { useState } from "react"
 import { Eye, EyeOff } from "lucide-react"
-
-// اصلاح شده: phone به صورت رشته با regex برای اعتبارسنجی شماره موبایل
-const loginSchema = z.object({
-  phone: z
-    .string()
-    .min(10, "شماره موبایل معتبر نیست")
-    .max(12, "شماره موبایل معتبر نیست")
-    .regex(/^9\d{9}$/, "شماره موبایل معتبر نیست"),
-  password: z.string().min(6, "کلمه عبور باید حداقل ۶ کاراکتر باشد"),
-})
+import { loginSchema } from "@/validate/login"
 
 type LoginFormValues = z.infer<typeof loginSchema>
 

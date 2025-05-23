@@ -11,22 +11,8 @@ import { z } from "zod"
 import Link from "next/link"
 import { useState } from "react"
 import { Eye, EyeOff } from "lucide-react"
+import { registerSchema } from "@/validate/register"
 
-// Zod schema - phone as string with length check
-const registerSchema = z
-  .object({
-    phone: z
-      .string()
-      .min(11, "شماره موبایل معتبر نیست")
-      .regex(/^9\d{9}$/, "شماره موبایل معتبر نیست"), // شروع با 9 و 10 رقم بعدش
-    name: z.string().min(2, "نام الزامی است"),
-    password: z.string().min(6, "رمز عبور حداقل ۶ کاراکتر است"),
-    cpassword: z.string().min(6, "تکرار رمز عبور الزامی است"),
-  })
-  .refine((data) => data.password === data.cpassword, {
-    message: "رمز عبور با تکرار آن مطابقت ندارد",
-    path: ["cpassword"],
-  })
 
 type RegisterFormValues = z.infer<typeof registerSchema>
 
