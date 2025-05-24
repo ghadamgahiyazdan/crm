@@ -22,8 +22,8 @@ model User {
   create_date     DateTime        @default(now())
   customers       User_Customer[] // 1-to-many relation
   reports         Report[] // 1-to-many relation
-  otp             Int
-  otp_expire_date DateTime
+  otp             Int?
+  otp_expire_date DateTime?
 }
 
 model User_Customer {

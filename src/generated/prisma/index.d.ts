@@ -1437,8 +1437,8 @@ export namespace Prisma {
     phone: string
     is_validate: boolean
     create_date: Date
-    otp: number
-    otp_expire_date: Date
+    otp: number | null
+    otp_expire_date: Date | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1529,8 +1529,8 @@ export namespace Prisma {
       phone: string
       is_validate: boolean
       create_date: Date
-      otp: number
-      otp_expire_date: Date
+      otp: number | null
+      otp_expire_date: Date | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -5862,6 +5862,14 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   /**
    * Field references
    */
@@ -5915,8 +5923,8 @@ export namespace Prisma {
     phone?: StringFilter<"User"> | string
     is_validate?: BoolFilter<"User"> | boolean
     create_date?: DateTimeFilter<"User"> | Date | string
-    otp?: IntFilter<"User"> | number
-    otp_expire_date?: DateTimeFilter<"User"> | Date | string
+    otp?: IntNullableFilter<"User"> | number | null
+    otp_expire_date?: DateTimeNullableFilter<"User"> | Date | string | null
     customers?: User_CustomerListRelationFilter
     reports?: ReportListRelationFilter
   }
@@ -5928,8 +5936,8 @@ export namespace Prisma {
     phone?: SortOrder
     is_validate?: SortOrder
     create_date?: SortOrder
-    otp?: SortOrder
-    otp_expire_date?: SortOrder
+    otp?: SortOrderInput | SortOrder
+    otp_expire_date?: SortOrderInput | SortOrder
     customers?: User_CustomerOrderByRelationAggregateInput
     reports?: ReportOrderByRelationAggregateInput
   }
@@ -5944,8 +5952,8 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     is_validate?: BoolFilter<"User"> | boolean
     create_date?: DateTimeFilter<"User"> | Date | string
-    otp?: IntFilter<"User"> | number
-    otp_expire_date?: DateTimeFilter<"User"> | Date | string
+    otp?: IntNullableFilter<"User"> | number | null
+    otp_expire_date?: DateTimeNullableFilter<"User"> | Date | string | null
     customers?: User_CustomerListRelationFilter
     reports?: ReportListRelationFilter
   }, "id" | "phone">
@@ -5957,8 +5965,8 @@ export namespace Prisma {
     phone?: SortOrder
     is_validate?: SortOrder
     create_date?: SortOrder
-    otp?: SortOrder
-    otp_expire_date?: SortOrder
+    otp?: SortOrderInput | SortOrder
+    otp_expire_date?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -5976,8 +5984,8 @@ export namespace Prisma {
     phone?: StringWithAggregatesFilter<"User"> | string
     is_validate?: BoolWithAggregatesFilter<"User"> | boolean
     create_date?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    otp?: IntWithAggregatesFilter<"User"> | number
-    otp_expire_date?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    otp?: IntNullableWithAggregatesFilter<"User"> | number | null
+    otp_expire_date?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   }
 
   export type User_CustomerWhereInput = {
@@ -6176,8 +6184,8 @@ export namespace Prisma {
     phone: string
     is_validate: boolean
     create_date?: Date | string
-    otp: number
-    otp_expire_date: Date | string
+    otp?: number | null
+    otp_expire_date?: Date | string | null
     customers?: User_CustomerCreateNestedManyWithoutUserInput
     reports?: ReportCreateNestedManyWithoutUserInput
   }
@@ -6189,8 +6197,8 @@ export namespace Prisma {
     phone: string
     is_validate: boolean
     create_date?: Date | string
-    otp: number
-    otp_expire_date: Date | string
+    otp?: number | null
+    otp_expire_date?: Date | string | null
     customers?: User_CustomerUncheckedCreateNestedManyWithoutUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutUserInput
   }
@@ -6201,8 +6209,8 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     is_validate?: BoolFieldUpdateOperationsInput | boolean
     create_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    otp?: IntFieldUpdateOperationsInput | number
-    otp_expire_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    otp?: NullableIntFieldUpdateOperationsInput | number | null
+    otp_expire_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     customers?: User_CustomerUpdateManyWithoutUserNestedInput
     reports?: ReportUpdateManyWithoutUserNestedInput
   }
@@ -6214,8 +6222,8 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     is_validate?: BoolFieldUpdateOperationsInput | boolean
     create_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    otp?: IntFieldUpdateOperationsInput | number
-    otp_expire_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    otp?: NullableIntFieldUpdateOperationsInput | number | null
+    otp_expire_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     customers?: User_CustomerUncheckedUpdateManyWithoutUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -6227,8 +6235,8 @@ export namespace Prisma {
     phone: string
     is_validate: boolean
     create_date?: Date | string
-    otp: number
-    otp_expire_date: Date | string
+    otp?: number | null
+    otp_expire_date?: Date | string | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -6237,8 +6245,8 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     is_validate?: BoolFieldUpdateOperationsInput | boolean
     create_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    otp?: IntFieldUpdateOperationsInput | number
-    otp_expire_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    otp?: NullableIntFieldUpdateOperationsInput | number | null
+    otp_expire_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -6248,8 +6256,8 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     is_validate?: BoolFieldUpdateOperationsInput | boolean
     create_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    otp?: IntFieldUpdateOperationsInput | number
-    otp_expire_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    otp?: NullableIntFieldUpdateOperationsInput | number | null
+    otp_expire_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type User_CustomerCreateInput = {
@@ -6470,6 +6478,28 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type User_CustomerListRelationFilter = {
     every?: User_CustomerWhereInput
     some?: User_CustomerWhereInput
@@ -6480,6 +6510,11 @@ export namespace Prisma {
     every?: ReportWhereInput
     some?: ReportWhereInput
     none?: ReportWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type User_CustomerOrderByRelationAggregateInput = {
@@ -6586,6 +6621,36 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type UserScalarRelationFilter = {
@@ -6757,12 +6822,16 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type User_CustomerUpdateManyWithoutUserNestedInput = {
@@ -6791,6 +6860,14 @@ export namespace Prisma {
     update?: ReportUpdateWithWhereUniqueWithoutUserInput | ReportUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ReportUpdateManyWithWhereWithoutUserInput | ReportUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ReportScalarWhereInput | ReportScalarWhereInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type User_CustomerUncheckedUpdateManyWithoutUserNestedInput = {
@@ -7002,6 +7079,28 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -7066,6 +7165,47 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type User_CustomerCreateWithoutUserInput = {
@@ -7180,8 +7320,8 @@ export namespace Prisma {
     phone: string
     is_validate: boolean
     create_date?: Date | string
-    otp: number
-    otp_expire_date: Date | string
+    otp?: number | null
+    otp_expire_date?: Date | string | null
     reports?: ReportCreateNestedManyWithoutUserInput
   }
 
@@ -7192,8 +7332,8 @@ export namespace Prisma {
     phone: string
     is_validate: boolean
     create_date?: Date | string
-    otp: number
-    otp_expire_date: Date | string
+    otp?: number | null
+    otp_expire_date?: Date | string | null
     reports?: ReportUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -7241,8 +7381,8 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     is_validate?: BoolFieldUpdateOperationsInput | boolean
     create_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    otp?: IntFieldUpdateOperationsInput | number
-    otp_expire_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    otp?: NullableIntFieldUpdateOperationsInput | number | null
+    otp_expire_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reports?: ReportUpdateManyWithoutUserNestedInput
   }
 
@@ -7253,8 +7393,8 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     is_validate?: BoolFieldUpdateOperationsInput | boolean
     create_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    otp?: IntFieldUpdateOperationsInput | number
-    otp_expire_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    otp?: NullableIntFieldUpdateOperationsInput | number | null
+    otp_expire_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reports?: ReportUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -7338,8 +7478,8 @@ export namespace Prisma {
     phone: string
     is_validate: boolean
     create_date?: Date | string
-    otp: number
-    otp_expire_date: Date | string
+    otp?: number | null
+    otp_expire_date?: Date | string | null
     customers?: User_CustomerCreateNestedManyWithoutUserInput
   }
 
@@ -7350,8 +7490,8 @@ export namespace Prisma {
     phone: string
     is_validate: boolean
     create_date?: Date | string
-    otp: number
-    otp_expire_date: Date | string
+    otp?: number | null
+    otp_expire_date?: Date | string | null
     customers?: User_CustomerUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -7427,8 +7567,8 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     is_validate?: BoolFieldUpdateOperationsInput | boolean
     create_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    otp?: IntFieldUpdateOperationsInput | number
-    otp_expire_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    otp?: NullableIntFieldUpdateOperationsInput | number | null
+    otp_expire_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     customers?: User_CustomerUpdateManyWithoutUserNestedInput
   }
 
@@ -7439,8 +7579,8 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     is_validate?: BoolFieldUpdateOperationsInput | boolean
     create_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    otp?: IntFieldUpdateOperationsInput | number
-    otp_expire_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    otp?: NullableIntFieldUpdateOperationsInput | number | null
+    otp_expire_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     customers?: User_CustomerUncheckedUpdateManyWithoutUserNestedInput
   }
 
