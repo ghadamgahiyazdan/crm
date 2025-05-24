@@ -4,16 +4,10 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { navItems } from "@/consts/navs";
 
 const NavBar = () => {
   const currentPath = usePathname();
-
-  const navItems = [
-    { name: "خانه", link: "/" },
-    { name: "سرویس ها", link: "/services" },
-    { name: "ارتباط با ما", link: "/contact" },
-    { name: "درباره ما", link: "/about" },
-  ];
 
   const currentNav = navItems.find((nav) => nav.link === currentPath);
 
